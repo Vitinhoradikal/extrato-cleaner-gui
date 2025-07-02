@@ -74,4 +74,4 @@ Geração de relatórios ou gráficos simples
 Este projeto é livre para uso pessoal. Para uso comercial, verifique a licença aplicável.
 
 👨‍💻 Autor
-Desenvolvido por [Seu Nome Aqui].
+Desenvolvido por Vitor Lúcio Machado.
