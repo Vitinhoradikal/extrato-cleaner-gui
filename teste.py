@@ -54,7 +54,8 @@ def remover_linhas(df2,caminho,banco):
         coluna = 'Historico'
     elif banco == 'safra':
         remover = ['SALDO TOTAL','SALDO APLIC AUTOMATICA','SALDO CONTA CORRENTE',
-                   'APLICACAO CDB AUTOMATICO','RESGATE DE RENDA FIXA']
+                   'APLICACAO CDB AUTOMATICO','RESGATE DE RENDA FIXA','CONTA CORRENTE',
+                   'APLIC CDB AUTOMATICO','RESGATE CDB AUTOMATICO']
         coluna = 'Lançamento'
     elif banco == 'infinity' or banco == 'nubank':
         edit = df2
