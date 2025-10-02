@@ -19,7 +19,7 @@ def buscar_arquivo(banco):
         rotulos = 2
     elif banco == 'safra':
         motor = 'xlrd'
-        rotulos = 10
+        rotulos = 0
     elif banco == 'infinity' or banco == 'nubank':
         motor = 'xlrd'
         rotulos = 0
@@ -47,7 +47,8 @@ def remover_linhas(df2,caminho,banco):
     """Remove linhas desnecessárias."""
     remover = ''
     coluna = ''
-    #array de linhas a remor da tabela do banco do brasil
+    #array de linhas a remor da tabela do banco.
+    # caso para o arquivo safra deve ser usado o ofx gerado pelo app do celular e converter para xls
     if banco == 'bb':
         remover = ['Saldo Anterior           ', 'BB Rende Fácil           ',
                    'S A L D O                ','BB Rende Fácil           ']
@@ -56,7 +57,7 @@ def remover_linhas(df2,caminho,banco):
         remover = ['SALDO TOTAL','SALDO APLIC AUTOMATICA','SALDO CONTA CORRENTE',
                    'APLICACAO CDB AUTOMATICO','RESGATE DE RENDA FIXA','CONTA CORRENTE',
                    'APLIC CDB AUTOMATICO','RESGATE CDB AUTOMATICO']
-        coluna = 'Lançamento'
+        coluna = 'description'
     elif banco == 'infinity' or banco == 'nubank':
         edit = df2
         transforma_em_numero(df2,caminho,banco)
@@ -79,7 +80,9 @@ def transforma_em_numero(edit,caminho,banco):
     if banco == 'bb':
         coluna = 'Valor R$ '
     elif banco == 'safra':
-        coluna = 'Valor'
+        coluna = 'id'
+    elif banco == 'infinity':
+        coluna = 'Valor (R$)'
     else:
         #coluna = 'Valor'
         salvar(edit,caminho,banco)
@@ -102,9 +105,9 @@ def salvar(edit,caminho,banco):
         edit.drop(['observacao','Data balancete','Agencia Origem',
                    'Lote','Numero Documento','Cod. Historico'], axis=1, inplace=True)
     elif banco == 'safra':
-        edit.drop(['Situação','Nº Documento','Saldo',], axis=1, inplace=True)
+        edit.drop(['id','checksum',], axis=1, inplace=True)
     elif banco == 'infinity':
-        edit.drop(['Moeda'], axis=1, inplace=True)
+        edit.drop(['Detalhe'], axis=1, inplace=True)
     elif banco == 'nubank':
         edit.drop(['Identificador'], axis=1, inplace=True)
 
